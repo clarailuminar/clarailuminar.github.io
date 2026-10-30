@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Meia da Sorte · Iluminar Partos</title>
+<meta name="description" content="A meia com uma grávida no calcanhar, pra quem faz parto. Lote único de 50 pares em rosa, branca e roxa. Pix na hora ou envio pelos Correios.">
+<meta name="theme-color" content="#1E1510">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Iluminar Partos">
+<meta property="og:title" content="Meia da Sorte · pé quente pro próximo parto">
+<meta property="og:description" content="Lote único de 50 pares, em rosa, branca e roxa. R$ 45 o par.">
+<meta property="og:url" content="https://clarailuminar.github.io/meia-da-sorte/">
+<meta property="og:image" content="https://clarailuminar.github.io/meia-da-sorte/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="icone.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<style>
+/* Layout: a dark stage. The sock is the star: it flies in, floats under a spotlight and swaps color with the picker.
+   Bands of pink and yellow cut the page like a knit stripe; the Pix comes out as a printed ticket. */
+:root{
+  --bg:#1E1510; --bg2:#36261B; --surface:#2E2119; --ink:#FFF4EA; --muted:#D6C3B1; --line:#4C3829;
+  --pink:#FF4F93; --pink-deep:#D81F6A; --yellow:#FFD12E; --yellow-ink:#3D2E1E; --purple:#9D5DD6; --cream:#FFF4EA;
+  --glow:#FF4F93; --ok:#5EE0A0; --bad:#FF8A8A; --yellow-text:#FFD12E;
+  --display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --ease:cubic-bezier(.2,.85,.2,1);
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --bg:#FFF1E6; --bg2:#FFE4D4; --surface:#FFFFFF; --ink:#3D2E1E; --muted:#7D6858; --line:#EEDCCD;
+  --pink:#F0327E; --pink-deep:#C4155A; --yellow:#FFCF1F; --yellow-ink:#3D2E1E; --purple:#8A4FB8; --cream:#FFF9F3;
+  --glow:#FF4F93; --ok:#1F8A55; --bad:#C8323C; --yellow-text:#D98E00; color-scheme:light}}
+:root[data-theme="light"]{
+  --bg:#FFF1E6; --bg2:#FFE4D4; --surface:#FFFFFF; --ink:#3D2E1E; --muted:#7D6858; --line:#EEDCCD;
+  --pink:#F0327E; --pink-deep:#C4155A; --yellow:#FFCF1F; --yellow-ink:#3D2E1E; --purple:#8A4FB8; --cream:#FFF9F3;
+  --glow:#FF4F93; --ok:#1F8A55; --bad:#C8323C; --yellow-text:#D98E00; color-scheme:light}
+
+*{box-sizing:border-box}
+html{overflow-x:clip;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;overflow-x:hidden;position:relative;-webkit-text-size-adjust:100%}
+[hidden]{display:none!important}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.07;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E")}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1;text-wrap:balance}
+p{margin:0}
+.gutter{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.col{max-width:560px;margin:0 auto}
+.eyebrow{font-family:var(--display);font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow)}
+.muted{color:var(--muted)}
+.small{font-size:.875rem}
+
+.sockart.rosa{--sock:#FF4F93;--acc:#FFD12E;--toe:#FFD12E;--dress:#FFD12E;--hair:#3B1E14;--skin:#E9C9A8;--lip:#FF2E7E}
+.sockart.branca{--sock:#FFF4EA;--acc:#FF4F93;--toe:#FF4F93;--dress:#FF4F93;--hair:#3B1E14;--skin:#D9A77E;--lip:#FF2E7E}
+.sockart.roxa{--sock:#9D5DD6;--acc:#FFD12E;--toe:#FFD12E;--dress:#FFD12E;--hair:#FF6A2A;--skin:#F0D2B6;--lip:#FF2E7E}
+/* ===== HERO ===== */
+.hero{position:relative;overflow:hidden;padding-block:28px 0;background:
+  radial-gradient(60% 50% at var(--sx,70%) var(--sy,40%), color-mix(in oklab, var(--glow) 45%, transparent), transparent 70%),
+  linear-gradient(180deg,var(--bg2),var(--bg) 90%)}
+.hero .col{position:relative;display:flex;flex-direction:column;gap:18px;min-height:0}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:.8rem;color:var(--muted)}
+.brand b{color:var(--ink);font-weight:700}
+.brand .tag{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:color-mix(in oklab,var(--surface) 70%,transparent)}
+.brand .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 var(--ok);animation:ping 2s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 color-mix(in oklab,var(--ok) 60%,transparent)}100%{box-shadow:0 0 0 10px transparent}}
+
+.stage{position:relative;height:min(78vw,400px);margin-inline:-8px}
+.sock{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.sock svg{height:100%;width:auto;max-width:92%;aspect-ratio:21/20;flex:none;overflow:visible;filter:drop-shadow(0 30px 40px rgba(0,0,0,.45)) drop-shadow(0 4px 10px rgba(0,0,0,.25));
+  transform:translate(calc(var(--px,0)*14px),calc(var(--py,0)*10px)) rotate(-8deg);transition:opacity .45s var(--ease),transform .25s ease-out}
+.sock.off svg{opacity:0;transform:translate(60px,-30px) rotate(10deg) scale(.9)}
+.sock.in svg{animation:flyin 1.1s var(--ease) both}
+@keyframes flyin{from{opacity:0;transform:translate(220px,-120px) rotate(28deg) scale(.6)}to{opacity:1;transform:translate(0,0) rotate(-8deg)}}
+.floaty{animation:floaty 6s ease-in-out 1.1s infinite}
+@keyframes floaty{0%,100%{translate:0 0}50%{translate:0 -10px}}
+.halo{position:absolute;inset:auto 0 8%;margin:auto;width:70%;height:18px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.45),transparent);filter:blur(6px)}
+.sticker{position:absolute;right:4%;top:6%;width:96px;height:96px;border-radius:50%;background:var(--yellow);color:var(--yellow-ink);display:grid;place-items:center;text-align:center;
+  font-family:var(--display);font-size:.62rem;font-weight:900;line-height:1.1;letter-spacing:.04em;transform:rotate(12deg);box-shadow:0 10px 24px rgba(0,0,0,.3);animation:stickin 1.1s var(--ease) .5s both,swing 7s ease-in-out 3s infinite}
+.sticker span{display:block}
+@keyframes stickin{from{transform:scale(0) rotate(-200deg)}to{transform:rotate(12deg)}}
+@keyframes swing{0%,12%,100%{rotate:0deg}3%{rotate:-9deg}6%{rotate:6deg}9%{rotate:-3deg}}
+.sticker::before{content:"";position:absolute;inset:6px;border:1.5px dashed var(--yellow-ink);border-radius:50%;opacity:.6}
+
+.headline{display:flex;flex-direction:column;gap:14px;padding-bottom:26px}
+h1{font-size:clamp(2.5rem,12.5vw,4.6rem);font-weight:900;letter-spacing:-.03em;text-transform:uppercase;line-height:.92}
+h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-top:.16em;margin-top:-.16em}
+h1 .w span{display:inline-block;animation:rise .9s var(--ease) both;animation-delay:calc(var(--i)*.09s + .15s)}
+h1 .y{color:var(--yellow-text)}h1 .p{color:var(--pink)}
+@keyframes rise{from{transform:translateY(110%) rotate(4deg)}to{transform:none}}
+.lede{font-size:1.05rem;max-width:34ch;color:var(--muted);animation:fade .8s .7s both}
+.lede b{color:var(--ink)}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;animation:fade .8s .9s both}
+.price{display:flex;flex-direction:column;padding:10px 12px;border-radius:14px;background:color-mix(in oklab,var(--surface) 80%,transparent);border:1px solid var(--line);font-variant-numeric:tabular-nums;min-width:0}
+.price b{font-family:var(--display);font-size:clamp(.95rem,4.4vw,1.15rem);font-weight:700;white-space:nowrap}
+.price span{font-size:.75rem;color:var(--muted)}
+.price.best{background:var(--yellow);border-color:var(--yellow);color:var(--yellow-ink)}
+.price.best span{color:var(--yellow-ink);opacity:.75}
+.cta{animation:fade .8s 1.05s both}
+
+/* ===== MARQUEE ===== */
+.marquee{overflow:hidden;background:var(--pink);color:#fff;font-family:var(--display);font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding-block:11px;transform:rotate(-1.2deg) scale(1.04);transform-origin:center;position:relative;z-index:2}
+.marquee .track{display:flex;gap:2.2em;width:max-content;animation:marquee 28s linear infinite;white-space:nowrap}
+.marquee span::after{content:"✦";margin-left:2.2em;color:var(--yellow)}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* ===== SECTIONS ===== */
+section{padding-block:44px 10px}
+.stepnum{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-size:.7rem;letter-spacing:.14em;color:var(--pink);text-transform:uppercase}
+.stepnum i{width:22px;height:22px;border-radius:50%;background:var(--pink);color:#fff;display:grid;place-items:center;font-style:normal;font-size:.7rem}
+h2{font-size:clamp(1.6rem,7vw,2.1rem);font-weight:700;letter-spacing:-.02em;margin-top:8px}
+.sec-head{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
+.sec-head p{color:var(--muted);max-width:40ch}
+.sec-head p b{color:var(--ink)}
+
+/* fotos reais: uma foto ocupa a largura; com mais de uma vira carrossel de arrastar */
+.carrossel{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-16px;padding:4px 16px 14px;scrollbar-width:none;overscroll-behavior-x:contain}
+.carrossel::-webkit-scrollbar{display:none}
+.foto{flex:0 0 100%;margin:0;position:relative;scroll-snap-align:center}
+.carrossel:has(.foto + .foto) .foto{flex-basis:78%}
+.pontos{display:flex;justify-content:center;gap:4px}
+.pontos button{width:24px;height:24px;border:0;padding:0;background:none;cursor:pointer;display:grid;place-items:center}
+.pontos button::before{content:"";width:8px;height:8px;border-radius:999px;background:var(--line);transition:width .3s var(--ease),background .3s}
+.pontos button[aria-current="true"]::before{width:22px;background:var(--pink)}
+.pontos button:focus-visible{outline:3px solid var(--yellow);outline-offset:-2px;border-radius:8px}
+.foto img{display:block;width:100%;height:auto;border-radius:22px;background:var(--surface);box-shadow:0 24px 40px -18px rgba(0,0,0,.55)}
+
+@supports (animation-timeline: view()){
+  .reveal{animation:lift linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
+  @keyframes lift{from{transform:translateY(36px) scale(.985);opacity:.6}to{transform:none;opacity:1}}
+}
+
+/* colors */
+.colors{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.color{position:relative;display:flex;flex-direction:column;gap:8px;padding:10px 10px 12px;border-radius:20px;background:var(--surface);border:1.5px solid var(--line);transition:transform .35s var(--ease),border-color .3s,box-shadow .3s;min-width:0}
+.color .pic{aspect-ratio:1;border-radius:14px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(70% 70% at 50% 40%,var(--c),color-mix(in oklab,var(--c) 55%,var(--bg)));cursor:pointer;border:0;padding:0;width:100%}
+.color .pic svg{width:104%;height:auto;aspect-ratio:21/20;flex:none;overflow:visible;transform:translate(-6%,2%) rotate(-10deg);filter:drop-shadow(0 10px 14px rgba(0,0,0,.35));transition:transform .5s var(--ease)}
+.color .pic:hover svg{transform:translate(-6%,2%) rotate(-4deg) scale(1.06)}
+.color .pic:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+.color.on{border-color:var(--c);box-shadow:0 0 0 3px color-mix(in oklab,var(--c) 35%,transparent),0 20px 30px -20px var(--c);transform:translateY(-4px)}
+.color .name{font-family:var(--display);font-size:.78rem;font-weight:700;text-align:center}
+.stepper{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:2px}
+.stepper button{height:38px;border-radius:11px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font-size:1.25rem;font-weight:700;cursor:pointer;line-height:1;transition:transform .15s,background .2s}
+.stepper button:active{transform:scale(.9)}
+.stepper button:disabled{opacity:.3;cursor:default}
+.stepper button:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+.stepper output{min-width:2ch;text-align:center;font-family:var(--display);font-size:1.15rem;font-weight:700;font-variant-numeric:tabular-nums}
+.stepper output.bump{animation:bump .3s var(--ease)}
+@keyframes bump{40%{transform:scale(1.4)}}
+.badge{position:absolute;top:-8px;right:-6px;background:var(--yellow);color:var(--yellow-ink);font-family:var(--display);font-size:.7rem;font-weight:900;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;box-shadow:0 4px 10px rgba(0,0,0,.3);animation:bump .35s var(--ease)}
+
+/* delivery */
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.seg label{position:relative;display:flex;flex-direction:column;gap:3px;padding:14px;border-radius:18px;border:1.5px solid var(--line);background:var(--surface);cursor:pointer;transition:transform .3s var(--ease),border-color .3s,background .3s;overflow:hidden}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label:has(input:checked){border-color:var(--pink);background:color-mix(in oklab,var(--pink) 16%,var(--surface));transform:translateY(-2px)}
+.seg label:has(input:focus-visible){outline:3px solid var(--yellow);outline-offset:2px}
+.seg b{font-family:var(--display);font-size:.85rem;font-weight:700}
+.seg span{font-size:.8rem;color:var(--muted)}
+.seg .em{display:block;width:40px;height:40px;margin:-2px 0 4px -3px}
+.seg .em svg{display:block;width:100%;height:100%;overflow:visible}
+.seg label:has(input:checked) .em svg{animation:hop .5s var(--ease)}
+@keyframes hop{40%{transform:translateY(-6px) rotate(-6deg)}}
+
+.fields{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:14px}
+.f{display:flex;flex-direction:column;gap:4px;grid-column:span 6;min-width:0}
+.f.s4{grid-column:span 4}.f.s3{grid-column:span 3}.f.s2{grid-column:span 2}.f.s1{grid-column:span 1}
+.f label{font-size:.8rem;font-weight:600;color:var(--muted)}
+.f input{font:inherit;font-size:16px;padding:12px 13px;border-radius:13px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);width:100%;transition:border-color .2s,box-shadow .2s}
+.f input:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 3px color-mix(in oklab,var(--pink) 30%,transparent)}
+.f input[aria-invalid="true"]{border-color:var(--bad)}
+.region{font-size:.85rem;color:var(--muted)}
+.region b{color:var(--ink)}
+
+/* summary */
+.summary{background:var(--surface);border:1.5px solid var(--line);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:8px;font-variant-numeric:tabular-nums}
+.row{display:flex;justify-content:space-between;gap:12px}
+.row.total{border-top:1.5px dashed var(--line);padding-top:12px;margin-top:4px;font-family:var(--display);font-size:1.35rem;font-weight:700;align-items:baseline}
+.row.total .n{color:var(--yellow)}
+.note{font-size:.84rem;color:var(--muted)}
+.error{color:var(--bad);font-size:.9rem;font-weight:600;margin-top:10px}
+
+.btn{font-family:var(--display);font-weight:700;font-size:.95rem;letter-spacing:.02em;padding:17px 20px;border-radius:18px;border:0;cursor:pointer;background:var(--pink);color:#fff;width:100%;text-align:center;text-decoration:none;display:block;
+  transition:transform .2s var(--ease),box-shadow .3s;box-shadow:0 12px 30px -10px var(--pink)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 18px 34px -10px var(--pink)}
+.btn:active{transform:scale(.97)}
+.btn:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.btn.alt{background:var(--yellow);color:var(--yellow-ink);box-shadow:0 12px 30px -10px var(--yellow)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line);box-shadow:none}
+.btn.mt{margin-top:14px}
+
+/* pix ticket */
+.ticket{position:relative;background:var(--cream);color:#3D2E1E;border-radius:22px;padding:24px 20px;display:flex;flex-direction:column;gap:14px;margin-top:18px;
+  animation:ticket .7s var(--ease) both;box-shadow:0 30px 60px -20px rgba(0,0,0,.5)}
+.ticket::before,.ticket::after{content:"";position:absolute;width:26px;height:26px;border-radius:50%;background:var(--bg);top:118px}
+.ticket::before{left:-13px}.ticket::after{right:-13px}
+@keyframes ticket{from{opacity:0;transform:translateY(40px) rotate(-2deg) scale(.96)}to{opacity:1;transform:none}}
+.ticket .eyebrow{color:var(--pink-deep);text-align:center}
+.ticket .amount{font-family:var(--display);font-weight:900;font-size:2.6rem;text-align:center;font-variant-numeric:tabular-nums;line-height:1;letter-spacing:-.02em}
+.ticket .cut{border-top:2px dashed #E6D4C6;margin:4px 0}
+.qr{background:#fff;border-radius:16px;padding:14px;width:min(100%,290px);margin:0 auto;box-shadow:inset 0 0 0 1.5px #EFE0D4;animation:qrpop .6s .25s var(--ease) both}
+@keyframes qrpop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
+.qr svg{display:block;width:100%;height:auto}
+.code{font-family:var(--mono);font-size:.72rem;word-break:break-all;background:#F8EDE6;border:1.5px dashed #E6D4C6;border-radius:12px;padding:10px;max-height:5.5em;overflow:auto;user-select:all;color:#5C4636}
+.ticket .small{color:#7D6858}
+.order-id{text-align:center;font-size:.9rem;color:#7D6858}
+.order-id b{font-family:var(--mono);color:#3D2E1E;letter-spacing:.08em;background:#F8EDE6;padding:2px 8px;border-radius:6px}
+.copied{color:var(--ok);font-weight:600;text-align:center;font-size:.9rem}
+.ticket .copied{color:#1F8A55}
+.notice{background:#F8EDE6;border-radius:14px;padding:14px;font-size:.92rem;color:#5C4636}
+.after{display:flex;flex-direction:column;gap:10px}
+.wa-num{text-align:center;font-size:.85rem;color:#7D6858}
+.wa-num b{user-select:all;color:#3D2E1E}
+.ticket .btn.ghost{color:#3D2E1E;border-color:#E6D4C6}
+.ticket .link{background:none;border:0;font:inherit;font-size:.85rem;color:#7D6858;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:6px;margin:0 auto}
+
+
+footer{padding-block:40px 110px;text-align:center;font-size:.82rem;color:var(--muted)}
+footer a{color:var(--ink);font-weight:700;text-decoration:underline;text-decoration-color:var(--pink);text-decoration-thickness:2px;text-underline-offset:4px;display:inline-block;padding:6px 4px}
+footer a:focus-visible{outline:3px solid var(--yellow);outline-offset:2px;border-radius:6px}
+
+/* sticky bar */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+  transform:translateY(110%);transition:transform .5s var(--ease)}
+.bar.show{transform:none}
+.bar .in{max-width:560px;margin:0 auto;background:var(--ink);color:var(--bg);border-radius:18px;padding:10px 10px 10px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 20px 40px -10px rgba(0,0,0,.6)}
+.bar .t{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.15}
+.bar .t small{font-size:.72rem;opacity:.7}
+.bar .t b{font-family:var(--display);font-size:1.05rem;font-variant-numeric:tabular-nums}
+.bar button{font-family:var(--display);font-weight:700;font-size:.8rem;padding:12px 16px;border-radius:12px;border:0;background:var(--pink);color:#fff;cursor:pointer;white-space:nowrap}
+
+/* ver de perto */
+.zoom{border:0;padding:20px;border-radius:26px;background:var(--surface);color:var(--ink);width:min(92vw,420px);max-height:92vh;box-shadow:0 40px 80px -20px rgba(0,0,0,.6)}
+.zoom[open]{animation:zoomin .45s var(--ease)}
+@keyframes zoomin{from{opacity:0;transform:translateY(24px) scale(.94)}to{opacity:1;transform:none}}
+.zoom::backdrop{background:rgba(22,14,9,.72);backdrop-filter:blur(6px)}
+.zoom .zstage{position:relative;border-radius:20px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;overflow:hidden;
+  background:radial-gradient(70% 70% at 50% 40%,var(--c),color-mix(in oklab,var(--c) 45%,var(--bg)))}
+.zoom .zstage svg{width:90%;height:auto;aspect-ratio:21/20;flex:none;overflow:visible;transform:translate(-4%,2%) rotate(-8deg);filter:drop-shadow(0 24px 30px rgba(0,0,0,.4))}
+.zoom h3{font-size:1.3rem;font-weight:700;margin:16px 0 4px;text-align:center}
+.zoom .zinfo{text-align:center;color:var(--muted);font-size:.9rem;min-height:1.5em}
+.zoom .zacts{display:grid;gap:10px;margin-top:14px}
+.zoom .x{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:0;background:var(--bg);color:var(--ink);font-size:1.3rem;line-height:1;cursor:pointer;z-index:1}
+.zoom .x:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+
+@media (max-width:360px){.brand .anos{display:none}}
+@media (max-width:380px){.colors{gap:7px}.color{padding:7px 7px 9px}.stepper button{height:34px}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .marquee .track{animation:none}.sticker{animation:none}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="sock" viewBox="0 0 420 400">
+  <g transform="rotate(-10 210 200)">
+  <!-- sock body -->
+  <path fill="var(--sock)" stroke="rgba(0,0,0,.18)" stroke-width="3" stroke-linejoin="round"
+    d="M118 42 H262 V228 C262 250 290 268 330 282 C370 296 404 316 398 346 C392 372 352 380 310 376 L150 352 C112 346 92 320 96 290 C100 266 118 254 118 240 Z"/>
+  <!-- cuff -->
+  <path fill="var(--sock)" stroke="rgba(0,0,0,.18)" stroke-width="3" d="M112 24 H268 V62 H112 Z"/>
+  <g stroke="rgba(0,0,0,.14)" stroke-width="3" stroke-linecap="round">
+    <path d="M126 28 V58 M144 28 V58 M162 28 V58 M180 28 V58 M198 28 V58 M216 28 V58 M234 28 V58 M252 28 V58"/>
+  </g>
+  <!-- heel -->
+  <path fill="var(--acc)" d="M96 290 C92 320 112 346 150 352 L192 358 C170 330 150 300 140 262 C122 258 100 266 96 290 Z"/>
+  <!-- toe -->
+  <path fill="var(--toe)" d="M352 300 C380 310 404 324 398 346 C394 366 372 376 348 378 C356 352 356 326 352 300 Z"/>
+  <!-- figure: deitada, barriga no calcanhar, pernas pelo pé -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="rgba(0,0,0,.32)" stroke-width="27" d="M238 296 C268 288 296 290 314 296 C332 302 344 304 360 302 M232 316 C262 316 288 320 304 328 C320 336 332 338 348 334"/>
+    <path stroke="var(--skin)" stroke-width="20" d="M238 296 C268 288 296 290 314 296 C332 302 344 304 360 302 M232 316 C262 316 288 320 304 328 C320 336 332 338 348 334"/>
+  </g>
+  <ellipse cx="198" cy="116" rx="42" ry="38" fill="var(--hair)"/>
+  <path fill="var(--dress)" stroke="rgba(0,0,0,.2)" stroke-width="2.5" stroke-linejoin="round"
+    d="M216 150 C190 140 168 146 160 162 C140 190 100 228 96 280 C92 330 130 358 182 356 C226 354 248 326 246 292 C246 262 238 220 232 190 C228 170 224 156 216 150 Z"/>
+  <ellipse cx="146" cy="300" rx="22" ry="30" fill="rgba(255,255,255,.26)"/>
+  <g fill="none" stroke-linecap="round">
+    <path stroke="rgba(0,0,0,.32)" stroke-width="19" d="M224 186 C222 230 196 272 140 300"/>
+    <path stroke="var(--skin)" stroke-width="13" d="M224 186 C222 230 196 272 140 300"/>
+  </g>
+  <rect x="186" y="126" width="22" height="26" rx="8" fill="var(--skin)"/>
+  <circle cx="192" cy="110" r="27" fill="var(--skin)" stroke="rgba(0,0,0,.25)" stroke-width="2.5"/>
+  <path fill="var(--hair)" d="M164 112 C158 80 178 68 192 70 C210 68 228 80 222 110 C216 96 204 90 192 92 C180 90 170 98 164 112 Z"/>
+  <circle cx="226" cy="120" r="11" fill="var(--hair)"/><circle cx="232" cy="140" r="9" fill="var(--hair)"/><circle cx="162" cy="134" r="8" fill="var(--hair)"/>
+  <circle cx="176" cy="110" r="2.8" fill="#2B1230"/><circle cx="192" cy="110" r="2.8" fill="#2B1230"/>
+  <path d="M176 121 Q183 128 190 121" fill="none" stroke="var(--lip)" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="170" cy="118" r="4.5" fill="var(--lip)" opacity=".3"/><circle cx="200" cy="120" r="4.5" fill="var(--lip)" opacity=".3"/>
+  <path transform="translate(144 160) scale(.9)" fill="var(--lip)" d="M0 8 C-8 0 -8 -8 -2 -8 C1 -8 0 -5 0 -5 C0 -5 -1 -8 2 -8 C8 -8 8 0 0 8 Z"/>
+  </g>
+</symbol>
+</defs></svg>
+
+<header class="hero gutter" id="hero">
+  <div class="col">
+    <div class="brand">
+      <span><b>Iluminar Partos</b><span class="anos"> · 10 anos</span></span>
+      <span class="tag"><span class="dot"></span><span>Lote único · <span data-lote>50</span> pares</span></span>
+    </div>
+    <div class="stage" id="stage">
+      <div class="halo"></div>
+      <div class="sock in floaty" id="heroSock" data-target="rosa"><svg id="heroImg" class="sockart rosa" role="img" aria-label="Meia rosa com a grávida de vestido amarelo"><use href="#sock"/></svg></div>
+      <div class="sticker" aria-hidden="true"><div><span>MEIA</span><span>DA</span><span>SORTE</span></div></div>
+    </div>
+    <div class="headline">
+      <h1 aria-label="Pé quente pro próximo parto">
+        <span class="w"><span style="--i:0">Pé</span></span>
+        <span class="w"><span class="y" style="--i:1">quente</span></span><br>
+        <span class="w"><span style="--i:2">pro</span></span>
+        <span class="w"><span style="--i:3">próximo</span></span><br>
+        <span class="w"><span class="p" style="--i:4">parto.</span></span>
+      </h1>
+      <p class="lede">Pra quem faz parto calçar no plantão, pra presentear uma gestante ou pra montar o kit das suas clientes. <b>Edição limitada:</b> é um lote só de <span data-lote>50</span> pares, e quando acabar, acabou.</p>
+      <div class="prices" id="prices" aria-label="Preços"></div>
+      <a class="btn cta" href="#escolha" id="cta">Escolher minha cor</a>
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true"><div class="track" id="track"></div></div>
+
+<main class="gutter">
+  <div class="col">
+
+    <section class="reveal" id="fotos" aria-label="Fotos da meia" hidden>
+      <div class="carrossel" id="carrossel"></div>
+      <div class="pontos" id="pontos" hidden></div>
+    </section>
+
+    <section class="reveal" id="escolha" aria-labelledby="h-cores">
+      <div class="sec-head">
+        <span class="stepnum"><i>1</i> Escolha</span>
+        <h2 id="h-cores">Qual é a sua cor de sorte?</h2>
+        <p>Toque na meia pra ver de perto. Pode misturar: o preço do kit vale pra qualquer combinação. <b>Leva o kit:</b> meia vai pra máquina, e você quer ter sempre uma limpa pro próximo parto. E se não for pra você, a gestante que você acompanha vai amar.</p>
+      </div>
+      <div class="colors" id="colors"></div>
+    </section>
+
+    <section class="reveal" aria-labelledby="h-entrega">
+      <div class="sec-head">
+        <span class="stepnum"><i>2</i> Entrega</span>
+        <h2 id="h-entrega">Como você quer receber?</h2>
+      </div>
+      <div class="seg" role="radiogroup" aria-labelledby="h-entrega">
+        <label><input type="radio" name="modo" id="modo-agora" value="agora"><span class="em" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M17 19V14a7 7 0 0 1 14 0v5" fill="none" stroke="var(--pink)" stroke-width="3.5" stroke-linecap="round"/><path d="M9 18h30l-2.6 22.4a3 3 0 0 1-3 2.6H14.6a3 3 0 0 1-3-2.6Z" fill="var(--yellow)" stroke="rgba(0,0,0,.22)" stroke-width="2" stroke-linejoin="round"/><path d="M24 37c-7-5-7-10.5-3-10.5 1.6 0 2.5 1.1 3 2.1.5-1 1.4-2.1 3-2.1 4 0 4 5.5-3 10.5Z" fill="var(--pink)"/></svg></span><b>Levar agora</b><span>Pega comigo, em mãos</span></label>
+        <label><input type="radio" name="modo" id="modo-casa" value="casa" checked><span class="em" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="8" y="18" width="32" height="25" rx="3" fill="var(--pink)" stroke="rgba(0,0,0,.22)" stroke-width="2"/><rect x="5" y="11" width="38" height="9" rx="2.5" fill="var(--pink)" stroke="rgba(0,0,0,.22)" stroke-width="2"/><rect x="6" y="12" width="36" height="7" rx="1.5" fill="rgba(255,255,255,.22)"/><rect x="21" y="11" width="6" height="32" fill="var(--yellow)"/><path d="M24 11c-3-6-10-6-8-1.5 1 2 5 1.5 8 1.5Zm0 0c3-6 10-6 8-1.5-1 2-5 1.5-8 1.5Z" fill="var(--yellow)" stroke="rgba(0,0,0,.22)" stroke-width="1.5" stroke-linejoin="round"/></svg></span><b>Receber em casa</b><span>Correios, postagem em até <span data-prazo>15 dias</span></span></label>
+      </div>
+      <form id="form" class="fields" novalidate>
+        <div class="f"><label for="nome">Nome completo</label><input id="nome" autocomplete="name" required></div>
+        <div class="f"><label for="whats">WhatsApp com DDD</label><input id="whats" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(71) 99999-9999" required></div>
+        <div class="f s3"><label for="cep">CEP</label><input id="cep" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" maxlength="9" required></div>
+        <div class="f s3" style="justify-content:flex-end"><p class="region" id="region" aria-live="polite"></p></div>
+        <div class="f s4"><label for="rua">Rua</label><input id="rua" autocomplete="address-line1" required></div>
+        <div class="f s2"><label for="num">Número</label><input id="num" autocomplete="off" required></div>
+        <div class="f"><label for="comp">Complemento <span style="font-weight:400">(opcional)</span></label><input id="comp" autocomplete="address-line2"></div>
+        <div class="f s3"><label for="bairro">Bairro</label><input id="bairro" required></div>
+        <div class="f s2"><label for="cidade">Cidade</label><input id="cidade" autocomplete="address-level2" required></div>
+        <div class="f s1"><label for="uf">UF</label><input id="uf" maxlength="2" autocomplete="address-level1" required style="text-transform:uppercase;padding-inline:8px"></div>
+      </form>
+    </section>
+
+    <section class="reveal" id="resumo" aria-labelledby="h-resumo">
+      <div class="sec-head">
+        <span class="stepnum"><i>3</i> Pix</span>
+        <h2 id="h-resumo">Resumo do pedido</h2>
+      </div>
+      <div class="summary" id="summary"></div>
+      <p class="error" id="err" role="alert" hidden></p>
+      <button class="btn mt" id="gerar" type="button">Gerar Pix</button>
+      <div id="pixwrap" hidden><div class="ticket" id="pix"></div></div>
+    </section>
+
+  </div>
+</main>
+
+
+<footer class="gutter">Lote único, sem reposição. Bons partos! Dúvidas? É só me chamar pessoalmente ou pelo WhatsApp.<br><a href="https://instagram.com/iluminarpartos" target="_blank" rel="noopener">@iluminarpartos</a></footer>
+
+<dialog class="zoom" id="zoom" aria-labelledby="zNome">
+  <button type="button" class="x" id="zFechar" aria-label="Fechar">×</button>
+  <div class="zstage"><svg id="zImg" class="sockart rosa" role="img" aria-label=""><use href="#sock"/></svg></div>
+  <h3 id="zNome">Rosa</h3>
+  <p class="zinfo" id="zInfo" aria-live="polite"></p>
+  <div class="zacts"><button type="button" class="btn" id="zAdd">Adicionar um par</button></div>
+</dialog>
+
+<div class="bar" id="bar" aria-hidden="true"><div class="in"><div class="t"><small id="barSub">0 pares</small><b id="barTotal">R$ 0,00</b></div><button type="button" id="barBtn">Gerar Pix</button></div></div>
+
+<script src="qrcode.js"></script>
+<script>
+/* ======= CONFIGURAÇÃO ======= */
+const CONFIG = {
+  pix: { chave: "iluminarpartos@gmail.com", nome: "Iluminar Partos", cidade: "Sao Paulo" },   // nome e cidade: confirmar com o cadastro do banco
+  whatsapp: "5548999291281",                   // só números com 55 + DDD
+  precos: { 1: 45, 2: 80, 3: 120 },
+  frete: { "Sudeste": 18, "Sul": 20, "Nordeste": 20, "Norte": 28, "Centro-Oeste": 22 },
+  freteProvisorio: true,                       // true = mostra aviso de frete estimado
+  freteGratisAPartirDe: null,                  // ex.: 3 = frete grátis a partir de 3 pares
+  prazoPostagem: "15 dias",                    // após o pagamento
+  lote: 50,
+  fotos: [                                     // fotos reais; com mais de uma, vira carrossel
+    { src: "fotos/rosa-no-pe.jpg", w: 1080, h: 1866, alt: "Dois pés com a meia rosa apoiados num móvel: a grávida de vestido amarelo tem a barriga no calcanhar e as pernas sobem pelo peito do pé" },
+    { src: "fotos/branca-no-pe.jpg", w: 1080, h: 1866, alt: "Uma grávida sentada na cama, vista de cima, com a barriga em primeiro plano e os pés cruzados com a meia branca" }
+  ],
+  planilha: "",                                // fase 2: URL do Apps Script (termina em /exec). Vazio = desligado
+  cores: [
+    { id: "rosa",   nome: "Rosa",   cor: "#FF4F93", alt: "Meia rosa com a grávida de vestido amarelo" },
+    { id: "branca", nome: "Branca", cor: "#FFB8D1", alt: "Meia branca com a grávida de vestido rosa" },
+    { id: "roxa",   nome: "Roxa",   cor: "#9D5DD6", alt: "Meia roxa com a grávida ruiva de vestido amarelo" }
+  ]
+};
+/* ============================ */
+
+const qty = Object.fromEntries(CONFIG.cores.map(c => [c.id, 0]));
+const $ = id => document.getElementById(id);
+const brl = v => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const brlCurto = v => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL", minimumFractionDigits: v % 1 ? 2 : 0 });
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const CAMPOS = ["nome","whats","cep","rua","num","comp","bairro","cidade","uf"];
+let orderId = "", orderTs = 0, active = "rosa", cepStatus = "";
+
+/* textos que vêm do CONFIG */
+document.querySelectorAll("[data-lote]").forEach(e => e.textContent = CONFIG.lote);
+document.querySelectorAll("[data-prazo]").forEach(e => e.textContent = CONFIG.prazoPostagem);
+(function renderFotos(){
+  if (!CONFIG.fotos?.length) return;
+  $("carrossel").innerHTML = CONFIG.fotos.map((f, i) => `<figure class="foto"><img src="${f.src}" alt="${f.alt}" width="${f.w}" height="${f.h}" loading="${i ? "lazy" : "eager"}" decoding="async"></figure>`).join("");
+  $("fotos").hidden = false;
+  if (CONFIG.fotos.length < 2) return;
+  const car = $("carrossel"), slides = [...car.children];
+  $("pontos").innerHTML = CONFIG.fotos.map((f, i) => `<button type="button" aria-label="Foto ${i+1} de ${CONFIG.fotos.length}"></button>`).join("");
+  $("pontos").hidden = false;
+  const pontos = [...$("pontos").children];
+  const marcar = () => {
+    const i = Math.round(car.scrollLeft / (slides[1].offsetLeft - slides[0].offsetLeft));
+    pontos.forEach((b, k) => b.setAttribute("aria-current", k === i ? "true" : "false"));
+  };
+  pontos.forEach((b, i) => b.addEventListener("click", () =>
+    car.scrollTo({ left: slides[i].offsetLeft - slides[0].offsetLeft, behavior: reduced ? "auto" : "smooth" })));
+  car.addEventListener("scroll", marcar, { passive: true });
+  marcar();
+})();
+$("track").innerHTML = Array(2).fill(`<span>Meia da sorte</span><span>Pé quente no plantão</span><span>Pra quem faz parto</span><span>Edição limitada</span><span>Lote único de ${CONFIG.lote} pares</span>`).join("");
+
+/* preços: o destaque amarelo vai para o menor preço por par (no empate, o kit maior) */
+(function renderPrecos(){
+  const ns = Object.keys(CONFIG.precos).map(Number).sort((a,b)=>a-b);
+  const best = ns.reduce((b,n) => CONFIG.precos[n]/n <= CONFIG.precos[b]/b ? n : b, ns[0]);
+  $("prices").innerHTML = ns.map(n => `<div class="price${n===best&&n>1?" best":""}"><b>${brlCurto(CONFIG.precos[n])}</b><span>${n} ${n===1?"par":"pares"}</span></div>`).join("");
+})();
+
+/* spotlight + parallax */
+const hero = $("hero");
+hero.addEventListener("pointermove", e => {
+  const r = hero.getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+  hero.style.setProperty("--sx", (x*100).toFixed(1)+"%"); hero.style.setProperty("--sy", (y*100).toFixed(1)+"%");
+  if (!reduced){ hero.style.setProperty("--px", ((x-.5)*2).toFixed(2)); hero.style.setProperty("--py", ((y-.5)*2).toFixed(2)); }
+});
+hero.addEventListener("pointerleave", () => { hero.style.setProperty("--px",0); hero.style.setProperty("--py",0); });
+
+function showColor(id){
+  const c = CONFIG.cores.find(k => k.id===id); if (!c) return;
+  active = id;
+  document.documentElement.style.setProperty("--glow", c.cor);
+  const s = $("heroSock"), img = $("heroImg");
+  if (s.dataset.target === c.id) return;
+  s.dataset.target = c.id;
+  s.classList.remove("in","floaty"); s.classList.add("off");
+  clearTimeout(s._t);
+  s._t = setTimeout(() => {
+    img.setAttribute("class","sockart "+c.id); img.setAttribute("aria-label", c.alt);
+    s.classList.remove("off"); s.classList.add("in","floaty");
+  }, reduced ? 0 : 380);
+}
+
+function precoMeias(n){
+  const p = CONFIG.precos;
+  return Math.floor(n/3)*p[3] + (n%3===2 ? p[2] : n%3===1 ? p[1] : 0);
+}
+
+const FAIXAS = [
+  [1000,19999,"SP","Sudeste"],[20000,28999,"RJ","Sudeste"],[29000,29999,"ES","Sudeste"],[30000,39999,"MG","Sudeste"],
+  [40000,48999,"BA","Nordeste"],[49000,49999,"SE","Nordeste"],[50000,56999,"PE","Nordeste"],[57000,57999,"AL","Nordeste"],
+  [58000,58999,"PB","Nordeste"],[59000,59999,"RN","Nordeste"],[60000,63999,"CE","Nordeste"],[64000,64999,"PI","Nordeste"],[65000,65999,"MA","Nordeste"],
+  [66000,68899,"PA","Norte"],[68900,68999,"AP","Norte"],[69000,69299,"AM","Norte"],[69300,69399,"RR","Norte"],[69400,69899,"AM","Norte"],[69900,69999,"AC","Norte"],
+  [70000,72799,"DF","Centro-Oeste"],[72800,72999,"GO","Centro-Oeste"],[73000,73699,"DF","Centro-Oeste"],[73700,76799,"GO","Centro-Oeste"],
+  [76800,76999,"RO","Norte"],[77000,77999,"TO","Norte"],[78000,78899,"MT","Centro-Oeste"],[79000,79999,"MS","Centro-Oeste"],
+  [80000,87999,"PR","Sul"],[88000,89999,"SC","Sul"],[90000,99999,"RS","Sul"]
+];
+function regiaoDoCep(cep){
+  const d = cep.replace(/\D/g,""); if (d.length !== 8) return null;
+  const n = parseInt(d.slice(0,5),10);
+  const f = FAIXAS.find(([a,b]) => n>=a && n<=b);
+  return f ? { uf: f[2], regiao: f[3] } : null;
+}
+
+/* ---- endereço pelo CEP (ViaCEP). Só preenche campos vazios ou que ele mesmo preencheu ---- */
+let cepBuscado = "";
+async function buscarCep(d){
+  if (d === cepBuscado) return;
+  cepBuscado = d; cepStatus = "Buscando endereço…"; update();
+  let j = null;
+  try {
+    const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 5000);
+    const r = await fetch(`https://viacep.com.br/ws/${d}/json/`, { signal: ctl.signal });
+    clearTimeout(t);
+    if (r.ok) j = await r.json();
+  } catch {}
+  if ($("cep").value.replace(/\D/g,"") !== d) return;   // a pessoa já mudou o CEP
+  cepStatus = "";
+  if (j && !j.erro){
+    const pos = (id, v) => { if (v && (!$(id).value.trim() || $(id).dataset.auto)){ $(id).value = v; $(id).dataset.auto = "1"; $(id).removeAttribute("aria-invalid"); } };
+    pos("rua", j.logradouro); pos("bairro", j.bairro); pos("cidade", j.localidade); pos("uf", j.uf);
+    if (j.logradouro && !$("num").value && document.activeElement === $("cep")) $("num").focus();
+  }
+  update(); salvar();
+}
+
+/* ---- Pix (BR Code estático) ---- */
+function crc16(s){let c=0xFFFF;for(let i=0;i<s.length;i++){c^=s.charCodeAt(i)<<8;for(let j=0;j<8;j++)c=(c&0x8000)?((c<<1)^0x1021)&0xFFFF:(c<<1)&0xFFFF;}return c.toString(16).toUpperCase().padStart(4,"0");}
+const tlv = (id,v) => id + String(v.length).padStart(2,"0") + v;
+const limpa = (s,max) => s.normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^A-Za-z0-9 ]/g,"").trim().toUpperCase().slice(0,max);
+function pixPayload(valor, txid){
+  const { chave, nome, cidade } = CONFIG.pix;
+  const p = tlv("00","01") + tlv("26", tlv("00","br.gov.bcb.pix") + tlv("01", chave.trim()))
+    + tlv("52","0000") + tlv("53","986") + tlv("54", valor.toFixed(2)) + tlv("58","BR")
+    + tlv("59", limpa(nome,25)) + tlv("60", limpa(cidade,15)) + tlv("62", tlv("05", txid || "***")) + "6304";
+  return p + crc16(p);
+}
+const pixPronto = () => CONFIG.pix.chave && CONFIG.pix.nome && CONFIG.pix.cidade;
+
+/* ---- guarda o pedido no aparelho: trocar pro app do banco e voltar não perde nada ---- */
+const STORE = "meia-da-sorte:v1", VALIDADE = 48*3600e3;
+function salvar(){
+  try {
+    localStorage.setItem(STORE, JSON.stringify({ qty, modo: modo(), campos: Object.fromEntries(CAMPOS.map(id => [id, $(id).value])),
+      pedido: orderId ? { id: orderId, ts: orderTs } : null }));
+  } catch {}
+}
+function restaurar(){
+  let s = null;
+  try { s = JSON.parse(localStorage.getItem(STORE) || "null"); } catch {}
+  if (!s) return null;
+  CONFIG.cores.forEach(c => { const n = Number(s.qty?.[c.id]); if (n > 0) qty[c.id] = Math.floor(n); });
+  if (s.modo === "agora") $("modo-agora").checked = true;
+  CAMPOS.forEach(id => { if (typeof s.campos?.[id] === "string") $(id).value = s.campos[id]; });
+  return s.pedido && Date.now() - s.pedido.ts < VALIDADE ? s.pedido : null;
+}
+
+/* ---- render ---- */
+function renderColors(){
+  $("colors").innerHTML = CONFIG.cores.map(c => `
+    <div class="color${qty[c.id]?" on":""}" style="--c:${c.cor}">
+      ${qty[c.id]?`<span class="badge">${qty[c.id]}</span>`:""}
+      <button type="button" class="pic" data-show="${c.id}" aria-label="Ver a meia ${c.nome} em destaque"><svg class="sockart ${c.id}" role="img" aria-label="${c.alt}"><use href="#sock"/></svg></button>
+      <span class="name">${c.nome}</span>
+      <div class="stepper">
+        <button type="button" data-id="${c.id}" data-d="-1" aria-label="Tirar um par ${c.nome}" ${qty[c.id]?"":"disabled"}>−</button>
+        <output aria-live="polite">${qty[c.id]}</output>
+        <button type="button" data-id="${c.id}" data-d="1" aria-label="Adicionar um par ${c.nome}">+</button>
+      </div>
+    </div>`).join("");
+}
+$("colors").addEventListener("click", e => {
+  const p = e.target.closest("[data-show]");
+  if (p){ abrirZoom(p.dataset.show); return; }
+  const b = e.target.closest("button[data-id]"); if (!b) return;
+  qty[b.dataset.id] = Math.max(0, qty[b.dataset.id] + Number(b.dataset.d));
+  if (Number(b.dataset.d) > 0) showColor(b.dataset.id);
+  renderColors(); mudou();
+  document.querySelector(`[data-id="${b.dataset.id}"]`)?.parentElement.querySelector("output")?.classList.add("bump");
+});
+
+/* ver de perto */
+let zoomId = "";
+function zoomInfo(){
+  const n = qty[zoomId];
+  $("zInfo").textContent = n ? `${n} ${n===1?"par":"pares"} no pedido` : "";
+}
+function abrirZoom(id){
+  const c = CONFIG.cores.find(k => k.id===id); if (!c) return;
+  zoomId = id;
+  $("zoom").style.setProperty("--c", c.cor);
+  $("zImg").setAttribute("class", "sockart "+id); $("zImg").setAttribute("aria-label", c.alt);
+  $("zNome").textContent = c.nome; zoomInfo();
+  showColor(id);
+  $("zoom").showModal();
+}
+$("zAdd").addEventListener("click", () => {
+  qty[zoomId]++; renderColors(); mudou(); zoomInfo();
+  setTimeout(() => $("zoom").close(), reduced ? 0 : 450);
+});
+$("zFechar").addEventListener("click", () => $("zoom").close());
+$("zoom").addEventListener("click", e => { if (e.target === $("zoom")) $("zoom").close(); });   // toque fora fecha
+
+$("cta").addEventListener("click", e => {
+  e.preventDefault();
+  $("escolha").scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+});
+
+const modo = () => $("modo-agora").checked ? "agora" : "casa";
+const pares = () => Object.values(qty).reduce((a,b)=>a+b,0);
+
+function calc(){
+  const n = pares(), meias = precoMeias(n);
+  let frete = 0, freteTxt = "", reg = null, aCombinar = false;
+  if (modo()==="casa"){
+    reg = regiaoDoCep($("cep").value);
+    if (CONFIG.freteGratisAPartirDe && n >= CONFIG.freteGratisAPartirDe){ freteTxt = "Grátis"; }
+    else if (!reg){ freteTxt = "Informe o CEP"; }
+    else if (CONFIG.frete[reg.regiao] == null){ freteTxt = "A combinar"; aCombinar = true; }
+    else { frete = CONFIG.frete[reg.regiao]; freteTxt = brl(frete) + (CONFIG.freteProvisorio ? " *" : ""); }
+  }
+  const semKit = n * CONFIG.precos[1];
+  return { n, meias, frete, freteTxt, reg, aCombinar, total: meias + frete, economia: semKit - meias };
+}
+
+let shownTotal = 0;
+function animarTotal(el, to){
+  if (reduced){ el.textContent = brl(to); shownTotal = to; return; }
+  const from = shownTotal, t0 = performance.now(), d = 450;
+  const step = t => { const k = Math.min(1,(t-t0)/d), e = 1-Math.pow(1-k,3); el.textContent = brl(from+(to-from)*e); if (k<1) requestAnimationFrame(step); else shownTotal = to; };
+  requestAnimationFrame(step);
+}
+
+function update(){
+  $("form").hidden = modo()!=="casa";
+  const c = calc();
+  const r = c.reg;
+  $("region").innerHTML = modo()!=="casa" ? "" : cepStatus || (r ? `Envio para <b>${r.uf}</b> · ${r.regiao}` : "");
+  const linhas = CONFIG.cores.filter(k=>qty[k.id]).map(k=>`<div class="row"><span>${qty[k.id]} × ${k.nome}</span></div>`).join("");
+  $("summary").innerHTML = c.n === 0
+    ? `<p class="muted">Nenhum par escolhido ainda. Use o + nas cores acima.</p>`
+    : `${linhas}
+       <div class="row"><span>${c.n} ${c.n>1?"pares":"par"}</span><span>${brl(c.meias)}</span></div>
+       ${c.economia>0?`<div class="row note"><span>Desconto de kit</span><span>− ${brl(c.economia)}</span></div>`:""}
+       ${modo()==="casa"?`<div class="row"><span>Frete${r?` (${r.regiao})`:""}</span><span>${c.freteTxt}</span></div>`:""}
+       <div class="row total"><span>Total</span><span class="n" id="totalN">${brl(c.total)}</span></div>
+       ${modo()==="casa"?`<p class="note">Postagem em até ${CONFIG.prazoPostagem} após o pagamento, com código de rastreio pelo WhatsApp.</p>`:""}
+       ${modo()==="casa"&&c.reg&&CONFIG.freteProvisorio&&!c.aCombinar?`<p class="note">* Frete estimado, ainda em ajuste.</p>`:""}
+       ${c.aCombinar?`<p class="note">O frete para essa região é combinado pelo WhatsApp depois. O Pix agora é só das meias.</p>`:""}`;
+  if (c.n>0) animarTotal($("totalN"), c.total); else shownTotal = 0;
+  const label = modo()==="agora" ? "Mostrar QR Code" : "Gerar Pix";
+  $("gerar").textContent = label; $("barBtn").textContent = label;
+  $("bar").classList.toggle("show", c.n>0); $("bar").setAttribute("aria-hidden", c.n>0 ? "false" : "true");
+  $("barSub").textContent = `${c.n} ${c.n===1?"par":"pares"}${modo()==="casa"?" + frete":""}`;
+  $("barTotal").textContent = brl(c.total);
+}
+
+/* qualquer mudança feita pela pessoa invalida o Pix já gerado */
+function mudou(){
+  $("pixwrap").hidden = true; orderId = "";
+  update(); salvar();
+}
+
+function validar(){
+  if (pares()===0) return "Escolha pelo menos um par.";
+  if (modo()==="agora") return "";
+  const req = ["nome","whats","cep","rua","num","bairro","cidade","uf"];
+  let falta = false;
+  req.forEach(id => { const ok = $(id).value.trim() !== ""; $(id).setAttribute("aria-invalid", ok?"false":"true"); if(!ok) falta = true; });
+  if (falta) return "Preencha os campos marcados para eu conseguir enviar.";
+  if (!regiaoDoCep($("cep").value)){ $("cep").setAttribute("aria-invalid","true"); return "Confira o CEP: ele precisa ter 8 números."; }
+  if ($("whats").value.replace(/\D/g,"").length < 10){ $("whats").setAttribute("aria-invalid","true"); return "Confira o WhatsApp com DDD."; }
+  return "";
+}
+
+function novoId(){
+  const a = "ABCDEFGHJKMNPQRSTUVWXYZ23456789", r = crypto.getRandomValues(new Uint32Array(4));
+  return Array.from(r, x => a[x % a.length]).join("");
+}
+
+function textoPedido(c){
+  const v = id => $(id).value.trim();
+  const itens = CONFIG.cores.filter(k=>qty[k.id]).map(k=>`- ${qty[k.id]}x ${k.nome}`).join("\n");
+  let t = `Oi! Fiz um pedido da meia da sorte.\nPedido ${orderId}\n${itens}\nMeias: ${brl(c.meias)}\n`;
+  if (modo()==="casa"){
+    t += `Frete: ${c.freteTxt}\nTotal pago no Pix: ${brl(c.total)}\n\n`;
+    t += `Nome: ${v("nome")}\nWhatsApp: ${v("whats")}\nEndereço: ${v("rua")}, ${v("num")}${v("comp")?" - "+v("comp"):""}\n${v("bairro")} - ${v("cidade")}/${v("uf").toUpperCase()}\nCEP: ${v("cep")}\n\n`;
+  } else {
+    t += `Total: ${brl(c.total)}\nEntregue em mãos\n\n`;
+  }
+  return t + "Segue o comprovante do Pix.";
+}
+
+/* manda o pedido para a planilha (só quando CONFIG.planilha estiver preenchido).
+   O pedido entra numa fila no aparelho e só sai dela depois de enviado: sem sinal, vai na próxima vez
+   que a página abrir ou a internet voltar. A planilha ignora pedido repetido. */
+const FILA = "meia-da-sorte:fila";
+const lerFila = () => { try { return JSON.parse(localStorage.getItem(FILA) || "[]"); } catch { return []; } };
+const gravarFila = f => { try { localStorage.setItem(FILA, JSON.stringify(f)); } catch {} };
+let enviando = false;
+async function enviarFila(){
+  if (!CONFIG.planilha || enviando) return;
+  enviando = true;
+  try {
+    for (const d of lerFila()){
+      await fetch(CONFIG.planilha, { method: "POST", mode: "no-cors", keepalive: true,
+        headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(d) });
+      gravarFila(lerFila().filter(x => x.pedido !== d.pedido));
+    }
+  } catch {} finally { enviando = false; }
+}
+function registrar(c){
+  if (!CONFIG.planilha) return;
+  const v = id => $(id).value.trim();
+  const dados = { pedido: orderId, criado: new Date(orderTs).toISOString(), modo: modo(),
+    itens: Object.fromEntries(CONFIG.cores.map(k => [k.nome, qty[k.id]])),
+    pares: c.n, meias: c.meias, frete: c.frete, total: c.total };
+  if (modo()==="casa") Object.assign(dados, { nome: v("nome"), whatsapp: v("whats"), cep: v("cep"), rua: v("rua"), numero: v("num"),
+    complemento: v("comp"), bairro: v("bairro"), cidade: v("cidade"), uf: v("uf").toUpperCase(), regiao: c.reg?.regiao || "" });
+  gravarFila([...lerFila().filter(x => x.pedido !== orderId), dados]);
+  enviarFila();
+}
+addEventListener("online", enviarFila);
+
+async function copiar(txt, el){
+  try { await navigator.clipboard.writeText(txt); el.hidden = false; setTimeout(()=>el.hidden=true, 2500); }
+  catch { const code = document.querySelector(".code"); if (code){ const r=document.createRange(); r.selectNodeContents(code); const s=getSelection(); s.removeAllRanges(); s.addRange(r);} }
+}
+
+function gerar(retomado){
+  const erro = validar();
+  if (erro && retomado){ orderId = ""; return; }
+  $("err").hidden = !erro; $("err").textContent = erro;
+  if (erro){ $("resumo").scrollIntoView({behavior: reduced?"auto":"smooth", block:"start"}); return; }
+  if (!retomado){ orderId = novoId(); orderTs = Date.now(); }
+  const c = calc();
+  const box = $("pix");
+  let html = `<p class="eyebrow">Pague com Pix</p><div class="amount">${brl(c.total)}</div><div class="cut"></div>`;
+  let payload = "";
+  if (pixPronto()){
+    payload = pixPayload(c.total, "MEIA"+orderId);
+    let svg = "";
+    try { const q = qrcode(0,"M"); q.addData(payload); q.make(); svg = q.createSvgTag({cellSize:4, margin:0, scalable:true}); } catch {}
+    html += svg ? `<div class="qr" role="img" aria-label="QR Code Pix de ${brl(c.total)}">${svg}</div>` : "";
+    html += `<p class="small" style="text-align:center">Abra o app do banco, escolha Pix e leia o QR Code. No mesmo celular? Use o Pix copia e cola.</p>
+             <div class="code" id="code">${payload}</div>
+             <button class="btn alt" type="button" id="copypix">Copiar código Pix</button>
+             <p class="copied" id="copied" hidden>Código copiado</p>`;
+  } else {
+    html += `<div class="notice">O Pix desta página ainda está sendo configurado. Me mande o pedido pelo WhatsApp que eu respondo com os dados para pagamento.</div>`;
+  }
+  html += `<p class="order-id">Pedido <b>${orderId}</b></p>`;
+  if (modo()==="casa"){
+    const txt = textoPedido(c);
+    html += `<div class="after"><p class="small" style="text-align:center"><b>Depois de pagar</b>, mande o pedido e o comprovante no WhatsApp.</p>`;
+    if (CONFIG.whatsapp){
+      html += `<a class="btn" href="https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(txt)}" target="_blank" rel="noopener">Enviar pedido no WhatsApp</a>
+               <p class="wa-num">Se não abrir, chame no <b>+${CONFIG.whatsapp}</b> e cole o resumo.</p>`;
+    }
+    html += `<button class="btn ghost" type="button" id="copyorder">Copiar resumo do pedido</button><p class="copied" id="copied2" hidden>Resumo copiado</p></div>`;
+    box.dataset.txt = txt;
+  }
+  html += `<button class="link" type="button" id="novo">${modo()==="agora" ? "Próxima venda" : "Fazer outro pedido"}</button>`;
+  box.innerHTML = html;
+  $("pixwrap").hidden = false;
+  $("bar").classList.remove("show"); $("bar").setAttribute("aria-hidden","true");   // a barra fixa não pode cobrir o QR Code
+  const label = modo()==="agora" ? "Mostrar QR Code de novo" : "Gerar Pix de novo";
+  $("gerar").textContent = label; $("barBtn").textContent = label;
+  $("copypix")?.addEventListener("click", () => copiar(payload, $("copied")));
+  $("copyorder")?.addEventListener("click", () => copiar(box.dataset.txt, $("copied2")));
+  $("novo").addEventListener("click", novoPedido);
+  if (!retomado) registrar(c);
+  salvar();
+  $("pixwrap").scrollIntoView({ behavior: reduced || retomado ? "auto" : "smooth", block: "start" });
+}
+$("gerar").addEventListener("click", () => gerar());
+$("barBtn").addEventListener("click", () => gerar());
+
+/* zera as cores para a próxima venda; o endereço fica, caso a mesma pessoa compre de novo */
+function novoPedido(){
+  CONFIG.cores.forEach(c => qty[c.id] = 0);
+  renderColors(); mudou();
+  scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
+}
+
+$("cep").addEventListener("input", e => {
+  const d = e.target.value.replace(/\D/g,"").slice(0,8);
+  e.target.value = d.length>5 ? d.slice(0,5)+"-"+d.slice(5) : d;
+  const r = regiaoDoCep(d);
+  if (r && (!$("uf").value || $("uf").dataset.auto)){ $("uf").value = r.uf; $("uf").dataset.auto = "1"; }
+  if (d.length === 8) buscarCep(d); else { cepBuscado = ""; cepStatus = ""; }
+});
+document.querySelectorAll('input[name="modo"]').forEach(r => r.addEventListener("change", mudou));
+$("form").addEventListener("input", e => {
+  if (e.target.id!=="cep"){ e.target.removeAttribute("aria-invalid"); delete e.target.dataset.auto; }
+  mudou();
+});
+$("form").addEventListener("submit", e => e.preventDefault());
+
+const pendente = restaurar();
+renderColors(); update();
+if (pares()) showColor(CONFIG.cores.find(c => qty[c.id]).id);
+if (pendente){ orderId = pendente.id; orderTs = pendente.ts; gerar(true); }
+enviarFila();
+
+/* funciona sem internet depois da primeira visita (bom pro congresso) */
+if ("serviceWorker" in navigator && isSecureContext) navigator.serviceWorker.register("sw.js").catch(() => {});
+</script>
+</body>
+</html>
